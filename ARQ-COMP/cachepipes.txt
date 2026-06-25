@@ -1,0 +1,253 @@
+TP8-9
+
+Memoria cache
+CPU quiiere un dato, cache pequena y rapida, memoria principal grande y mas lent
+
+Una direccion no se usa entera de una sola vez. Se parte en campos para responder tres preguntas: donde busco, es el bloque correcto y que byte exacto quiero?
+
+
+indice/conjunto: donde busco
+etiqueta: confirmacion
+desplazamiento: byte interno
+
+Normalmente los datos que se guardan a memoria cache se cargan in bulk y dentro del rango leido de la ram esta el dato que buscamos. Realmente no cuesta mucho mas cargar por bulk, lo mas caro es no encontrar el dato en tiempo de ejecucion. 
+
+La direccion apunta a un solo byte pero esta particionada para identificar que hay en cache. Para que la cache pueda obtener la respuesta de si tiene el dato se parte el dato en partes. INDICE/ETIQUETA/DESPLAZAMIENTO
+
+
+
+Bloques de memoria y lineas de cache.
+La cache no guarda bytes sueltos: guarda bloques completos de memoria. 
+
+La memoria principal se parte en bloques: bloques de 16 bytes por ej, cache de 64 lineas de 1 via. (correspondencia directa) La direccion 1234 pertenece al bloque 77.
+
+Cada linea se corresponde a un bloque. Para una direccion concreta: direccion 1234 / 16 bytes por bloque. Bloque = 1234 div 16 = 77. Desplazamiento = 1234 mod 16 = 2; 
+
+Un rango esta entre 2 y 4 lineas para cada bloque. Que linea se usa por cada bloque en funcion del numero del bloque. Para saber en que linea se guarda se guarda en orden. Once we get to the end of the cache memory we loop back to the beginning. EACH RAM ADDRESS HAS A PREDETERMINED CACHE INDEX. 
+
+como los bloques son de 16 bytes, y la cache de 64 bytes de 1 via
+
+-----------------------------------------------
+direccion 1234 / 16 bytes por bloque
+bloque = 1234 div 16 = 77
+desplazamiento = 1234 mod 16 = 2
+
+etiqueta = (1234 div 16) div 64 = 1
+Lineo (conjunto) = (1234 div 16) mod 64 = 13
+----------------------------------------------
+
+El bloque 77 contiene direcciones 1232 a 1247.
+
+
+
+1) Que byte quiero dentro del bloque?
+
+16 bits = 4 bytes.
+
+el resto de la direccion es la etiqueta. 
+
+
+etiqueta indice offset
+(etiqueta es unica para cada bloque)
+
+etiqueta indice y offset
+6, 6, 4 (bits)
+
+Primero se obtiene el bloque; despues la linea; finalmente se verifica la etiqueta
+
+Cargar el bloque
+Dos bloques diferentes pueden caer en la misma linea de cache, para esto esta la etiqueta.
+
+
+mas de un lugar por conjunto (asociativa por conjuntos)
+una via es una linea posible dentro del mismo conjunto. 
+
+
+asociativa: dos bloques que caen en el mismo conjunto pueden convivir. 
+
+
+
+Como leer ejercicios de formato de cache
+
+Usar siempre el mismo orden evita confundirse con lienas, vias y conjuntos.
+
+Tamano de bloque
+offset = log2(bytes por bloque)
+
+Indice: Directo log2(lineas)
+por conjuntos: log2(conjuntos)
+tag = bits de direccion - indice - offset
+
+acceso
+indice/conjunto para buscar. Tagapara confirmar. 
+
+
+
+formato de direccion mapeo de direcciones y CPI efectivo. 
+
+
+
+
+
+
+
+----------------------------------------
+
+
+
+Una memoria principal es direccionable por byte y tiene 1 mbyte, se usa una cache de 128 lineas, bloques de 64 bytes y organizacion asociativa por conjuntos de 4 vias.
+Se pide
+formato de direccion
+numero de conjuntos
+para direccion 0x3A5C9 indicar:
+	etiqueta
+	conjunto
+	desplazamiento
+
+en una cache por conjuntos el indice selecciona un conjunto. Dentro del conjunto el bloque puede ocupar cualquiera de sus vias. 
+
+En lugar de haber un unico bloque de memoria ram puede haber hasta 4 por cada uno de los conjuntos. 
+
+Para 1megabyte vamos a necesitar 2 (a la ) 20
+
+Cuantos conjuntos hay? Lineas totales / vias = 128 / 4 = 32 conjuntos.
+
+Direcciones: 1mbyte = 2 a la 20 bytes -> 20 bits
+
+
+1) etiqueta
+direccion de 20 bits
+etiqueta = 20 - 5 - 6 = 9 bits
+conjuntos = 32 conjuntos
+indice de conjunto = log2(32) = 5 bits
+
+64 bytes por bloque
+desplazamiento = log2(64) = 6 bits.
+
+
+
+
+el desplazamiento identifica el byte dentro del bloque; no decide ubicacion en cache
+
+el indice de conunto reduce la busqueda: el hardware solo compara dentro de un conjunto
+
+la etiqueta distingue bloques distintos que caen en el mismo conjunto
+
+la asociatividad de 4 vias significa "4 posibles lugares" dentro del cojnunto, no 4 conjuntos.
+
+
+
+
+EJ2: CORRESPONDENCIA DIRECTA
+
+Memoria principal de 64 kbyte, direccionable por byte.
+
+Cache de correspondencia directa con 64 lineas y bloques de 16 bytes. 
+
+Direcciones a analizar: 
+	0x2A3C
+	0x6A3F
+	0x2A42
+
+Se pide linea de cache, etiqueta, desplazamiento y bloque de bytes asociado.
+
+
+64kbyte = 2 a la 16. Direccion de 16 bits
+
+Bloque 16 bits, offset 4 bits.
+
+64 lineas -> indice = 6 bits.
+
+
+
+
+Conflicto visible; 0x2A3C y 0x6A3F caen en la linea 35 pero tienen etiquetas distintas. No pueden coexistir en correspondencia directa. 
+
+Como el bloque es de 16b, se cargan todos los bytes desde 0x2A30 hasta 0x2a3F
+
+
+El tag de la primera direccion y el tag de la segunda es 42 pero tienen el mismo destino dentro de la cache. Si hago una referencia al primer dato y luego una referencia al segundo dato va a haber un problema con la cache y hay que esperar a que la cache vuelva a cargar. 
+
+
+
+
+offset selecciona un byte dentro del bloque cargado.
+
+el indice de linea indica donde debe guardarse el bloque, no hay otra alternativa
+
+la etiqueta se guarda porque muchas direcciones diferentes pueden producir el mismo indice.
+
+
+
+
+
+EJ3: CALCULO DE CPI
+
+Los fallos que pueden ocurrir accediendo a cache.
+
+Un procesador tiene CPI base = 1,2 si no hay fallos de cache.
+L1 tiene tasa de acientos del 92%.  Cada fallo de L1 agrega 8 ciclos para constultar L2.
+
+El sistema completo L1L2 logra 98,5% de aciertos; por lo tanto, 1,5% de los accessos van a memoria princupal, con penalizacion de 70 ciclos. 
+Calcular CPI efectivo y una cache de un nivel equivalente.
+
+
+
+CPI efectivo = CPI base + ciclos extra por fallos L1 + ciclos exttra por fallo de L2 (acceso a memoria principal).
+
+
+
+CPI efectivo
+
+CPI = 1,2 + 0,08 x 8 + 0,015 x 70
+CPI = 1,2 + 0,64 + 1,05 = 2,89
+
+El procesador no pasa de 1,2 a 2,89 por ejecutar instrucciones mas complejas, sino por ciclos de espera causadaos por fallos de cache.
+
+
+Si una cache de un solo nivel tiene la misma penalizacion de memoria de 70 ciclos, debe cumplir.
+
+
+CPI BASE: 1,2
+CPI efectivo: 2,89
+Hit equivalente: 97,6
+la jerarquia reduce miss penalty.
+
+
+
+un hit en l1 no agrega penalizacion; se ejecuta con el cpi base
+
+un mis en l1 no siempre lleg a a memoria principal; primero puede resolverse en l2,.
+
+por eso distinguimos entre fallo de L1 y fallo total del sistema L1+L2.
+la penalizacion se pondera por probabilidad: un evento raro pero caro puede dominar el CPI.
+
+
+
+Ley de amdahl
+
+
+
+
+EJERCICIO 3: Fiabilidad y disponibilidadd
+
+
+Subsistema de almacenamiento en serie
+
+6 SSD. cADA UNO CON MTTF = 900.000 h
+1 controlador con MTTF = 500.000 h
+ventiladores, cada uno con MTTF = 250.000h
+calcular MTTF del sistema y disponibilidad
+
+
+En un sistema en seri, falla el sistema si falla cualquier component. Por eso se suman las tasas de falla. 
+
+
+
+
+Los registros de estado y control estan separados, hay que asignar registros independientes para las funciones de lectura y escritura. 
+
+Para el primer dispositivo
+1 registro de estado: Necesita albergar 2 lineas de estado. Como 2 lineas entran en los 8 bits del registro, con 1 alcanza.
+
+

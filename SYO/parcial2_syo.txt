@@ -1,0 +1,25 @@
+1. RECUPERACION ANALISIS PREVIO
+	TIPO ORGANIZACION
+	ACTIVIDAD PRINCIPAL
+	PROBLEMA O NECESIDAD
+	PROCESO CRITICO ELEGIDO
+	PRINCIPALES ACTORES INVOLUCRADOS.
+
+2. CASOS DE USO
+	Identificar y modelar al menos
+	3 actores
+	4 casos de uso principales
+	Incluir diagrama de casos de uso, breve descripcion de cada caso de uso. 
+
+3. HISTORIAS DE USUARIO Y CRITERIOS GHERKIN
+	Seleccionar 2 casos de uso y redactar
+	HISTORIA DE USUARIO
+	usando formato "como rol quiero accion para beneficio"
+	ESCENARIOS GHERKIN
+	redactar al menos 3 escenarios por historia, usando DADO, CUANDO, ENTONCES.
+
+4. DIAGRAMAS DE SECUENCIA
+	Construir 2 diagramas de secuencia UML, cada uno debe representar interaccion entre actores y sistema. Flujode mensajes. Secuencia logica de ejecucion.
+
+5. PROPUESTA DE MEJORA
+	Proponer una mejora para el proceso critico, explicar como impactaria en la organizacion, identificar beneficios esperados. 

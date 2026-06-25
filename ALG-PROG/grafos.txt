@@ -1,0 +1,60 @@
+Un grafo G es un conjunto de pares de vertices V que estan unidosp or aristas.
+
+Otra forma de denoeminacion de los vertices es nodos y las aristas arcos.
+Las aristas en un grafo pueden ser dirigidos o no dirigidos.
+Se dice que un arco (uv) esta dirigido de u a v si el par esta ordenado con u precediendo v
+
+se dice que un arco es no dirigido si el par (u, v) no es ordernado.
+
+
+grafo: relacion de coautor
+La coautoria es una relacion simetrica; a decir, si A es coautor en algo con B, entonces B necesariamente es coautor con A.
+
+podemos asociar con un programa orientado a objetos un grafo cuyos vertices representan las clases definidas en el programa y cuyos arcos indican la herencia entre clases
+
+hay una arista de un vertice v a un vertice u
+digrafo.
+
+geographic information system (GIS)
+
+
+un grafo esta conectado si para dos vertices dados hay un camino entre ellos
+
+un grafo dirigido G esta fuertemente conectado si para cuualquiera dos vertices y y v, u alcanza v y v alcanza u.
+
+TAD grafo
+
+all the relevant methods.
+
+
+una lista de vertices, los vertices tienen referencias a los nodos.
+let's suppose an arbitrary graph, we don't know what the head is. 
+
+We implement two linkedpasitionallists (lists)
+One list for the nodes themselves and one list for the connections between the nodse.
+
+The connections between the nodes are stored as a list(?)
+
+if we want to find a connection between two nodes we go through the two lists and then find the paths from the references list.
+
+ez (not)
+
+lista de adyacencia
+
+todas las referencias a vertices se ponen en una lista posicional.
+y luego cada vertice tiene su propia lista con los arcos que la conectan a los demas.
+
+
+
+maya de adyacencia
+
+le tiro un nodo como clave y me devuelve una lista con referencias a los nodos a los que esta interconectado.
+
+
+
+matriz de adyacencia
+
+ueeeeeeeee
+this is the most important one, back to matrices we go. 
+
+

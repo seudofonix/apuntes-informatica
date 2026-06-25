@@ -1,0 +1,86 @@
+E/S en RISCV
+
+Como se comunica un programa RISC-V con dispositivos externos usando direcciones especiales y polling?
+
+En E/S mapeada a memoria, algunas direcciones no son RAM comun: al leerlas o escribirlas se interactua con un dispositivo. 
+There's an I/O module that we can write to, kind of how it works in linux where different devices are treated as files by the filesystem.
+
+(MMIO): Reserved addresses for device registries. One SW might turn on a display or send a character.
+
+Polling: El programa pregunta repetidamente si el dpispositivo esta listo antes de leer o escribir.
+
+Memoria comun: Direcciones donde el programa guarda variables y datos. Buffer, contador, cadena.
+
+
+CPU sends and receives data using data and control addresses. 
+
+Estado / ready: indica si hay dato disponible o si el display puede recibir: se lee con lw
+datos: contiene el caracter, numero o patron que se transfiere: se lee con lw o se escribe con sw
+control: configura o habilita un comportamiento del dispositivo: se escribe co nsw.
+
+
+
+
+EJ1: Leer una cadena y calcular longitud.
+
+Reserbar un buffer en data con space 64
+Usar syscall de lectura de string para cagar el buffer
+recorrer con lb y avanzar el puntero=
+cortar al encontrar ASCII 10 o byte cero. 
+
+teclado y pantalla con MMIO
+
+registro mmio
+keyboard control / ready
+keyboard data
+display control / ready
+display data
+
+read: indica si hay una tecla disponible
+read: caracter ingresado
+read: indica si la pantalla puede recibir
+escribir: caracter a mostrar. 
+
+
+Enunciado: Conectar keyboard and display mmio simulator. Repetir. Esperartecla, leer caracter, esperar pnantalla y mostrarlo. 
+
+cargar las cuatro direcciones mmio en registros
+no leer datos hasta qeu el ready del teclado sea destintio de cero.
+
+no escribir datos hasta que el ready del display sea distinto de cero
+
+volver al inicio para procesaroel proximo caracter.
+
+
+el registro de datos solo se usa cuando el registro de estado confirma que el dispositivo esta listo. 
+
+.eqv KBD_READY
+.eqv KBD_DATA
+.eqv DSP_READY
+.eqv DSP_DATA 
+
+.text
+li s0, KBD_READY
+li s1, KBD_DATA
+li s2, DSP_READY
+li s3, DSP_DATA
+
+loop:
+lw t0, 0(s0)
+beq t0, zero, loop
+lw t1, 0(s1)
+
+espera_display:
+lw t2, 0(s2)
+beq t2, zero, espera_display
+sw t1, 0(s3)
+j loop
+
+
+ej2: display de 7 segmentos
+
+hacer un programa que cuente del 1 al 20 en el display mmio ubicado en 0xFFFF0010/11
+aoeusnhousnth
+
+
+ideally, you should store the hex code that contains the bitwise for every LED separately on an array, with each element being its correspondent number.

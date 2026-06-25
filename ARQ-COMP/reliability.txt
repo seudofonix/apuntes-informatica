@@ -1,0 +1,146 @@
+Definiendo el exito: Tiempo vs productividad.
+
+Tiempo de respuesta y productividad.
+
+Cuanto tarda en completarse una tarea individiual? (esencial para el usuario final)
+Cual es la cantidad total de trabajo completado en una unidad de tiempo? (esencial para servidores y centros de datos).
+
+How many users you could have served on an unit of time.
+
+
+Medicion del rendimiento relativo: Prestaciones_X = 1 / TiempoEjecucion_X
+Maquina A ejecuta programa en 10 segundos.
+Maquina B ejecuta programa en 15 segundos.
+
+15/10 = 1.5
+La maquina A es 1.5 veces mas rapida que la maquina B.
+
+
+El tiempo de CPU del usuario y del sistema esta dictado por los latidos del procesador. 
+
+Ciclos de reloj.
+La frecuencia es la inversa del periodo. 
+
+La frecuencia de reloj es un valor que se da, y se cronometran programas milimetricamente para terminar obteniendo la frecuencia.
+
+
+
+If we can't recompile a program then we don't have much choice besides adding frequency. (if our program is not multithreaded that is obv)
+
+
+Ciclos_B = 1.2 x 20 x 10 a la 9
+6s = (1.2 x 20 x 10 a la 9) / Frecuencia_B
+Frecuencia_B = (24 x 10 a la 9) / 6 = 4GHz
+El disenador debe apuntar a una frecuencia de 4GHz
+
+Factor CPI.
+Los ciclos de reloj no existen en el vacio; dependen intrinsecamente del repertorio de instrucciones que el procesador debe ejecutar.
+
+
+TiempoEjecucion = Instrucciones x CPI x TiempoCiclo
+
+Instrucciones: Dictado por el program, el compilador y la arquitectura del conjunto de instrucciones.
+
+CPI: Dictado por la arquitectura (ISA) Y LA MICROARQUITECTURA DE HARDWARE.
+
+TiempoCiclo: Dictado por la tecnologia de estado solido y la fisica del procesador.
+
+
+
+
+Analisis de codigo
+
+Distintos tipos de instrucciones toman distintas cantidades de tiempo para ser ejecutadas, 
+es totalmente posible tener un programa con mas lineas de codigo que tarde menos tiempo en ejecutarse gracias al CPI.
+
+CPI = Ciclos / Instrucciones
+
+the way we code affects performance, like a lot
+compilers like predictability and compilers make things go fast.
+
+
+
+Pilar II: Estrategias de eficiencia energetica
+
+1. Hacer bien nada
+apagar el reloj de modulos inactivos.
+Elimina consumo dinamico sin afectar rendimiento activo
+
+
+2. Escalado Dinamico
+Reducir frecuencia y voltaje durante baja demanda, ahorro de energia en reposo
+
+
+3. Optimize for the typical scenario
+APtimize the hardware for the MOST COMMON workload.
+
+4. Overclocking.
+
+
+
+MTTF: (Mean time to failure)
+Mide el itempo historico esperado antes de una interrupcion.
+
+FIT: (Failures in time)
+Inversa del MTF. Generalmente expresado por cada mil millones de horas.
+
+MTTR: (Mean time to repair)
+Tiempo necesario para la etapa de recuperacion. 
+
+
+Disponibilidad = MTTF  /  (MTTF + MTTR)
+
+
+Acumulacion de fallas en sistemas complejos
+
+10 Discos: 1,000,000 hrs -> 10 x 1 = 10 FIT
+1 CPU (500,000) -> 2 FIT
+1 pwr source (200,000) -> 5 FIT
+1 fan (200,000) -> 5 FIT
+1 sata cable (1,000,000) -> 1 FIT
+
+FIT SUBSISTEMA = (10 + 2 + 5 + 5 + 1) / 1,000,000 = 23,000 por mil millones de horas.
+
+Harsh reality box: MTTF Sistema = 1,000,000,000 / 23,000 = 43,500 horas
+(Menos de 5 anos. Las fuentes rendundantes son criticas)
+
+En promedio: Se espera que un componente falle cada 43,500 horas por mas que esten rated por 200,000 horas como minimo.
+
+lo que dice el fabricante normalmente es estadistico, prueban discos y toman el promedio de cuanto tardan en morirse. 
+los componentes pueden fallar muchisimo antes.
+
+
+EJEMPLO 2
+
+los subsistemas de disco suelen tener fuentes de alimentacion redundantes par mejorar la fiabilidad. Utilizando los componentes anteriores y los MTF, calcula la fiabilidad de las fuentes de alimentacion redundantes. 
+
+Es practicamente imposible que dos fuentes fallen al mismo tiempo.
+pasamos de un promedio de 200.000 horas a un promedio de 833.333.333
+
+Metrica teorica 
+MFLOPS Pico: Operaciones de punto flotante en condiciones ideales irreales.
+Frecuencia maxima (GHz): El limite termico antes del estrangulamiento
+
+SPECrate / Linpack: Ejecucion basada en codigo real y compiladores reales.
+Interaccion del sistema; Evalua verdaderos cuellos de botella (memoria, caches), no solo la CPU.
+
+
+
+cuadrante estrategico de inverrsion
+
+
+
+TDP indica cuanda electricidad consume mi procesador y de que vataje debe ser mi fuente de alimentacion. El TDP es una maetrica termina, no electrica. Define la capacidad minima de disipacion due un sistem ade refrigeracion debe tene.r4 
+
+Cuando las computadoras superan los 95C los componentes se mueren. 
+Pueden degradar los transistores permanentemente.
+Para evitar su destruccion, el chip interviene su suministro. Reduec automaticamente el voltaje y los multiplicadores de multiplicadores de reloj. 
+
+
+implicaciones practicas: el cuello de botella oculto (VRM)
+el modulo regulador de voltaje transforma los 12v de la fuente de alimentacion en los 1.3v exactos y limpios que requiere la CPU
+
+este proceso de reduccion de voltaje genera un calor masivo por sim ismo. Las fases del VRM absorben esta inmensa carga termica.
+
+Instalar una CPU De gama alta en una placa base economica provocara que el VRM se sobrecaliente. Aunque la CPU este fria, la placa base ahogara la energia, destruyendo el rendimiento. 
+

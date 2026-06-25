@@ -1,0 +1,99 @@
+use notebook lm
+
+Tipos de datos jerarquicos.
+
+ARBOLES
+
+Un arbol T es un conjunot de nodos que almacenan elementos tal que los nodos tienen una relacion padre-hijo que satisface las siguintese propiedades: 
+
+Si T no es vacio, este tiene un nodo especial llamado raiz de T, este no tiene padre.
+
+Cada nodo v de T diferente del raiz tiene un unico nodo padre w; cada nodo con padre w es un hijo de w.
+
+
+
+Raiz: nodo sin padre
+nodo interno: nodo con al menos un hijo
+nodo externo (hoja): nodo sin hijos
+ancestros de un nodo: padre abuelo, bisabuelos, etc.
+profundidad: numero de ancestros.
+peso de un arbol: maxima profundidad de nodos
+descendientes de un nodo: hijo, nieto, bisnieto, etc. 
+subarbol
+
+En informatica, un arbol es un modelo abstracto de una estructura jerarquica.
+
+Aplicaciones: graficos organizacionales
+sistemas de archivos
+entornos de programacion
+
+decano -> secretarios -> delegados
+que se yo no soy peronista
+
+una cosa es el rectorado y otra cosa es la facultad en si misma
+
+la culpa es del rector
+
+
+
+
+o(problems?) introducing binary search trees
+logarithm the squarest of issues with this one simple trick.
+
+trees are everywhere
+
+if there's leaf nodes on different levels, that tree is unbalanced.
+
+
+Arco (edge) del arbol T dado un par de nodos (u, v) tales que u es el padre de v o viceversa  que los une. y camino (path) de t es una secuencia de nodos tal que cualesquiera dos nodos consecutivos en la secuencia.
+
+
+arbol ordenado: el libro
+
+hipervinculo
+
+
+que chucha es tad
+
+TAD arbol
+
+definimos un tad arbol utilizando el concepto de posicion como una abstraccion para un nodo de un arbol. Se almacena un elemento en cada posicion y las posiciones satisfacen las realciones padre-hijo que definen la estructura del arbol. Un objeto posicion para un arbol soporta los metodos: 
+
+getElement()
+root
+parent
+children
+numChildren
+isInternal
+isExternal
+isRoot
+size
+isempty
+iterator
+positions
+
+what the fuck is an iterator
+an iterator is a reference to an object that allows you to traverse something.
+
+
+A java iterator is an boject that lets you traverse elements of a collection one at a time without exposing the internal structure of the collection. 
+
+In short, it's safer and it allows us to not worry about memory leaks and having several copies of our data in memory.
+
+
+Tipo abstracto de datos (TAD).
+
+databases use trees
+picture renaper, use a binary tree to look at the H person.
+
+each node is a list if we want elements to be repeateable as well.
+
+arboles B
+tree B
+
+un arbol ordenado o degenerado se convierte en lista
+
+
+each variable of the binary tree has its own property.
+
+n = 2e - 1

@@ -1,0 +1,23 @@
+Diagrama de clases.
+
+Arrow up: inherited class
+Side arrow: implementation
+
+Italic: abstract
+underline: static
+
+
+Lista simplemente enlazada y lista doblemente enlazada. 
+
+SinglyLinkedList<E>
+DoublyLinkedList<E>
+
+addFirst
+addLast
+removeFirst
+removeLast
+get(index)
+size()
+clear()
+toArray()
+

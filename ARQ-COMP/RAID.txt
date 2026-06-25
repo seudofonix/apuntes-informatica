@@ -1,0 +1,109 @@
+Lectura o escritura en memoria
+
+El proceso a seguir cuando se desea leer o escribir en la memoria sera el siguiente.
+
+	Mandar una senal para activar el tablero y esperar a que termine el tiempo de activacion (ACTIVE)
+
+	Mandar una senal para saber cual es la fila en la que se debe posicionar y esperar a su latencia (RAS)
+
+	Mandar una senal para saber cual es la columna o celda doned se debe posicionar y esperar (CAS)
+
+
+El tiempo que tarda la memoria en proporcionar el dato es la suma de las tres latencias. Como se comenta anteriormente, antes de enviar el dato/instruccion a donde deba irr, se deben leer varias celdas de memoria. Por lo tanto, hay que pasar de una celda a otra, e ir esperando su correspondiente latencia cas.
+Si cada tablero tiene, por ejemplo 64 celdas, y se van a leer 20 posiciones, las latencias totales a esperar son
+
+	1 ACTIVE (menos de 64 celdas)
+
+	3 RAS (cada fila tiene 8 posiciones)
+
+	20 CAS (ya que se van a leer 20 celdas)
+
+
+La latencia mas importante es la latencia CAS, y cuanto menor sea esta mejeor rendimiento tendra el ordenador en general. 
+(Optimize for the most common scenario) ram freq
+
+rate: memory clock frequency in mhz
+first word (ns): how mnay nanoseconds it takes to return adta after data request.
+
+cl: cas latency_ it tells us how many clock cycles the memory will delay to return reqquested data.
+
+DDR3200C14 returns data in 8.75ns
+which is faster thna
+DDR3600C16 8.89ns
+
+
+frequency is more about bandwidth than it is about latency
+in order to really get advantage of your frequency you gotta use large amounts of RAM at once.
+
+error detection ram
+make sure your ram modules are reliable
+
+dihutenosa asonetuhid
+aoeusnth
+aoeusnthaoeusnth
+aoeuhtnsaoeuhtns
+snthaeousnthaoesunth
+
+
+bit de paridad 
+
+there's a few calculations that need to be made for bit parity
+
+sc ram chips are slower to access but each data bit is correct, so it's best for servers.
+
+SSDs
+electrons are stored within boxes
+
+data is written per page and erased per block
+it's completely electrically sealed from the outside.
+
+we apply voltage to a wall and because of quantum physics, the electron gets trapped inside the cell.
+it's because of this high voltage requirement that SSDs are so prone to dying.
+
+We gotta make sure that if the disk dies, it all goes at once, not just sectors most of the data is written to. 
+which is also why reliably deleting data in an SSD is so difficult. You have no say on where the data is actually stored within the disk so that it all wears down at once.
+
+In a hard drive you're always certain on where the data is actually located within the disk, which means you can shred it. 
+
+la ilusion del disco logico 
+
+RAID (reduntant array of independent disks) es una matriz de discos. We have a logical funnel and a logical disk with multiple real physical disks. 
+
+
+
+lo
+toda topologia raid se construye combinanto cosas no se me sacaron la presentacion
+
+
+RAID 0: Rendimiento puro (sin redundancia)
+mecanica: los datos se escriben secuencialmente en tiras a traves de multiples discos. El sistema operativo lee y escribe de todos los discos simultaneamente.
+
+Sin tolerancia a fallos. Rendimiento maximo.
+
+Al carecer de paridad o espejos, si un solo disco falla, el 100% de la matriz se pierde.
+
+because we've partitioned files among multiple files, if one of the hard drives dies, you lose ALL your data. 
+great!
+
+
+
+
+RAID 1: seguridad absoluta (mirroring)
+
+we use two disks, one of them redundant
+
+desmitificando la paridad: la magia del XOR
+como recuperamos datos sin tener una copia exacta? Mediante la funcion logica exclusive or
+
+En lugar de copiar el disco entero, calculamos un bloque de paridad, si un disco muere simplemente hacemos ingenieria inversa con la ecuacion
+menor costo de almacenamiento fisico, mayor costo de procesamiento computacional. 
+
+
+RAID 5: el estandar distribuido
+
+mecanica: los datos y la paridad se entrelazan a traves de todos los discos de la matriz
+
+al distribuir los bloques de paridad en un patron ciclico (diagonal) se elimina el cuello de botella de escritura de RAID 4.
+ningun disco unico recibe todo el trafico de paridad.
+
+requiere un minimo de 3 discos. tolera la perdida de 1 disco sin perder informacion. Es el equilibrio eonotre capacidad costo y rendimiento

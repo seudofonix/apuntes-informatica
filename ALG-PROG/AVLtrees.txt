@@ -1,0 +1,87 @@
+preorder binary tree
+
+un recorrido visita de manera sistematica los nodos de un arbol
+
+en un recorrido preorden un nodo se visita antes que sus descendientes
+
+aplicacion: imprrimir un documento estructurado.
+
+
+
+
+inorder: left -> center -> right
+preorder center -> left -> right
+postorder left -> right -> center
+
+you can use these to check whether or not an arithmetic expression is correct
+
+implementacion: estructura enlazada
+
+un nodo se representa por un objecto que almacena
+
+elemento
+nodo padre
+secuencia de nodos hijos
+
+los objetos de nodo implementan el TAD posicion
+
+not all trees are binary
+
+when you have a regular non-binary tree you gotta create a list/array of references to another node, up to you.
+
+representaciones de arboles binarios con arreglos
+store the root toward the beginning and the children toward the end.
+
+rank(root) = 0
+si el nodo es el hijo izquierdo del parent, rank(node) = 2
+rank(parent(node)) +1
+si el nodo es el hijo derecho del parent(node), rank(node) = 2
+rank(parent(node)) + 2
+
+thing about implementing binary trees as arrays, you're gonna need to define an *EMPTY* element for when a node has no children.
+this way we can reliably read the binary tree within the array and just implement it as is, if we need anything bigger, realloc 
+
+binary search trees are logarithmic if you didn't know by the way.
+mapas ordenados: las claves se suponen totalmente ordenadas: los elementos se almacenan en orden por sus claves, esto nos permite responder consultas del tipo los vecinos mas cercanos.
+
+hashmaps: based on a distinct element determine position on the array.
+
+it's the way we naturally search words on a dictionary, first letter, then second letter, then third letter until we find the word we're looking for. 
+
+
+pick a word that divides the dictionary into two. 
+
+a professional programmer is the one who gets to sell one of their programs. 
+
+let's pretend we want to fill up a binary tree by manually inputting each of the data nodes in. we should exchange the values of the head and children nodes.
+a self balancing tree will always have the middle element up at the top, the moment we write C into ABC, B switches place with A to become the new head sirce it's the new middle.
+
+oh fucky sakey
+
+
+
+
+busqueda en tablas (vuelos)
+
+x = (origin, destination, date, time).
+
+subMap(k1, k2) busca todos los vuelos para un rango de tiempo dado
+
+por ejemplo: para k1 = (REL, AEP, 05Mayo, 09:30), y x2 = (REL, AEP, 06Mayo, 20:00) devuelve:
+
+
+
+
+AVL TREES
+
+
+
+balancing binary trees, how the fuck
+
+en la practica, la modificacion de un arbol T causada por una operacion de reestructuracion de trinodos se puede implementar mediante el analisis de casos como una rotacion unica o como una doble rtacion.
+
+when you insert things in order your tree is going to be unbalanced
+when you insert things randomly, it's mostly going to remain balanced
+??????
+
+who thought of this?

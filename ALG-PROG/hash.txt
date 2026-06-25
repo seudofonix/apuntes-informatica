@@ -1,0 +1,36 @@
+Funciones hash
+
+El objetivo de una funcion hash, h, es asignar cada clave k a un numero entereo en el rango [0, n-1] donde N es la capacidad del arreglo de cubetas para una tabla hash. 
+
+La idea principal de este enfoque ues usar el valor de la funcion hash, h(k) como un indice en nuestro arreglo. 
+
+
+Es comun considerar que la evaluacio de una funcion hash, h(k) consta de dos partes: un codigo hash ue asigna una clave k a un numero entero
+una funcion de compresion que asigna el codigohash a un numero entero dentro de un rango de indices para un arreglo de cubos. 
+
+Codigos hash
+Codigo de bits como enteros: Podemos simplemente tomar como codigo hash para X una interpretacion entera de sus bits. Java se basa en codigos hash de 32 bits, por lo que para los tipos primitivos byte, short, int y char, podemos lograr un buen codigo hash simplemente convirtiendo un valor en int. 
+Del msimo modo, para una variable x de tipo primitivo flotante, podemos convertir x en un numero entero usando una llamada a Float.floatToIntBits(x), y luego usar este numero entero como el codigo hash de x. Para un tipo cuya representacion de bits es mas larga que un codigo hash deseado (como los tipos long y double de Java),el esquema anterior no se aplica de inmediato.
+
+polinomial: un codigo hash usa la multiplicacion por diferentes potencias como una forma de distribuir la influencia de cada componente en el codigo hash resultante.
+
+Una variante del codigo hash polinomial reemplaza la multiplicacion por un cambio ciclico de una suma parcial por un cierto numero de bits. 
+
+Un cambio ciclico de 5 bits del valor de 32 bits
+
+se logra tomando los cinco bits mas a la izquierda y llevandolos todos a la derecha. 
+
+
+
+static int hashCode(String s)
+{
+	int h = 0;
+	for(int i = 0; i < s.length(); i++)
+	{
+		h = (h<<5) | (h>>>27);
+		h += (int) s.charAt(i);
+	}
+	return h;
+}
+
+do random bullshit with the bits until something works

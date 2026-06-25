@@ -1,0 +1,80 @@
+Polling
+
+Polling: CPU checks constantly if a device is ready to operate. 
+Simple to implement but really inefficient, consumes CPU time even when there's no data to transfer. Useful in simple systems. *Completely blocks the CPU* during the waiting period and the transfer.
+
+
+
+Interrupciones
+
+El dispositivo interrumpe a la CPU cuando necesita atencion. La CPU interrumpe lo que esta haciendo para atender al dispositivo. 
+Permite que la CPU realice otras tareas mientras espera eventos I/O
+
+
+
+DMA (Direct memory access)
+
+A special driver transfers the data without CPU intervention.
+Cpu's only job is to start the operation and receives an interruption at the end. Very efficient for large data volumes, frees up the CPU almost fully for other tasks. Minimizes CPU loads and executes other tasks in parallel.
+
+
+
+
+
+
+
+
+Bus communication
+
+Un bus es una linea de transporte que carga datos, direcciones y control entre distintos componentes de un sistema. 
+DATOS, DIRECCIONES, CONTROL
+
+Ancho de banda indica cuantos datos transfiere por unidad de tiempo.
+DATOS x UNIDAD TIEMPO
+
+Latencia es el tiempo que tarda en completarse una operacion de transferencia de datos, incluyendo posibles esperas
+TIEMPO TRANSFERENCIA
+
+
+
+
+
+
+When several peripherals want to use the bus at the same time, we need a refereeing mechanism.
+
+In the DAISY CHAIN topology, the physical order determines the priority. The peripherals CLOSEST to the referee got the upper hand. 
+
+In EQUITATIVE REFEREEING schemes, all devices have the same access oportunity, distributing the usage of the bus in a more BALANCED way.
+
+
+
+I/O devices are controlled via REGISTROS DE ESTADO y CONTROL.
+
+Cada dispositivo puede tener varias lineas de entrada y salida que deben MAPEARSE A REGISTROS que la CPU puede leer o escribir.
+
+
+
+Se analiza la eficiencia midiendo CANTIDAD DE OPERACIONES POR SEGNUDO, TIEMPO TOTAL TRANSFERENCIA, PORCENTAJE USO CPU.
+Dependera del tipo de dispositivo, y volumen de datos. 
+
+
+
+
+RISCV I/O
+
+Las operaciones I/O se manejan mediante MMIO (memory mapped io)
+Different devices are accessible through different memory addresses.
+
+
+SCSI BUSES
+Fixed priority: Highest priority ones access more and the ones scatter what remain.
+
+FAIR PRIORITY: total bandwidth / num of devices
+
+Daisy Chain es un tipo de arbitraje centralizado basado en una conexion en cadena fisica de los perifericos. 
+
+El orden fisico de conexion determina la prioridad de cada elemento. Las senales del bus viajan recorriendo secuencialmente los dispositivos conectados. 
+
+Los dispositivos fisicamente mas cercanos al arbitro central tienen ventaja. 
+
+cada bloque de la memoria principal se asigna a una unica linea posible de la cache determinada matematicamente.

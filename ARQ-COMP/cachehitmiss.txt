@@ -1,0 +1,137 @@
+Para que un dato pueda ser procesado por el CPU debe tambier estar incluido en el nivel inferior.
+
+La CPU nunca pide datos de RAM directamente, los datos se cargan en cache.
+
+
+Aciertos y fallos
+Si la CPU necesita un dato que esta en la cache es un acierto y lo puede leer sin mas. 
+Si ese dato no esta en la cache, la cache accede a memoria y trae un bloque completo de memoria.
+
+Dentro de ese bloque esta tambien el dato que pide la CPU.
+Como la RAM esta segmentada en bloques es mejor pedir los datos vecinos por una probabilidad de que se necesiten el resto de los datos tambien.
+
+Tiempo de acierto: tiempo necesario para acceder al dato en el nivel superior. Incluye el tiempo para verificar si es hit o miss. 
+
+Penalizacion de fallo: tiempo total para reparar el fallo sumando el tiempo de acceso (latencia de RAM) mas el tiempo de trarnsferencia (ancho de banda).
+
+
+T medio = T acierto + (Frecuencia fallos * penalizacion fallo)
+
+Los fallos obligan a la CPU a manjar tiempos ed acceso variables y soportar interrupciones.
+
+Un fallo grave pierde cientos de ciclos, la CPU debe ser interrumpida para hacer otras tareas.
+
+la penalizacion de fallo crece proporcional al tamano del bloque
+la frecuencia depende del tamano del bloque, un bloque muy pequeno teniendo muchos fallos por dependencias de datos, y si es demasiado grande tambien
+
+
+
+Las 4 decisiones del diseno de la cache.
+
+1. Ubicacion, donde puede ubicarse un bloque traido al nivel superior?
+2. Identificacion: como se encuentra un bloque cuando ya esta en el nivel superior
+3. Reemplazo: Ante un fallo y sin espacio, que bloque debe ser expulsado?
+4. Escritura: cuando modificamos un dato no me saques el powerpointttttttttttttttttttttttttttttttttttt
+
+
+Topologias de ubicacion: Correspondencia directa: cada bloque de ram va a un unico lugar predeterminaod
+
+asociativa por conjuntos: el bloque puede ir a un grupo restringido de lugares, 2 o 4 vias
+
+totalmente asociativa, el bloque puede ubicarse en absolutamente cualquier lugar disponible de la cache.
+
+DEB mod # bloques
+DEB mod # conjuntos
+Ubicacion = cualquiera
+
+
+
+ANATOMIA DEL DIRECCIONAMIENTO
+
+Etiqueta: Los bits superires. Se usan para la comparacion matematica. A mayor asociatividad, mas grande debe ser la etiqueta. 
+
+Indice: Los bits medios, actuan como el selector del conjunto especifico en la cache. Una cache totalmente asociativa no tiene indice.
+
+Desplazamiento(offset)
+los bits inferiores. Indican que byte exacto leer dentro del bloque ded atos fisico. 
+
+
+
+Decision 3: El dilema del reemplazo
+Cuando ocurre un fallo y la cache esta llena, a quien sacrificamoss
+
+
+Aleatorio: Simple barato y rapido
+
+LRU: Expulsa el bloque inacitvo por mas tiempo, minimiza errores futuros pero es computacionalmente muy caro de mantener en caches grandes. 
+
+En caches grandes (256kb+), aleatorio y LRU rinden de forma casi identica, hacienod que el alto costo del LRU puro sea innecesario.
+
+
+En hardware, el tiempo que toma tomar una decision inteligente puede ser mas lesnto que simplemente tomar una mala decision muy rapido. 
+
+Para obtener un comportaimento casi aleatorio sin sufrir la latencia del sumador durante un fallo critico, el hardware precalcula el bloque a expulsar para el siguient fallo en background. Cuando ocurre el fallo real, la respuesta en el buffer es instantanea.
+
+Dado que el procesador solo modifica escrituras el 9% del tiempo, optimizamos drasticamene para el caso comun de la lectura. 
+
+Write through: Se escribe en cache y ram simultaneamente. Mantiene coherencia instantanea, vital en multiprocesamiento
+Write allocate: trae el bloque fisico a la cache, luego lo modifica localmente, actua como un fallo de lectura normal.
+
+write back: se escribe solo en cache. la ram inferior se actualiza unicamente cundo el bloue modificado es finalmente expulsado
+
+no ubicar en escritura: modifica directamente la ram infderior y esquiva cargar el bloque modificando en la cache.
+
+sintesis: la taxonomia de las 3c
+
+forzoso: El dato nunca antes habia sido solicitado. Inevitable en la primera referencia. Solucion: aumentar el tamano del bloque fisico o ilmplementar pre-fetching en hardware.
+
+capacidad: la cache es fisicamente muy pequena para el conjunto de trabajo. Los bolques utiles son sobreescritos constantemente. Solucion de ingerineria: aumentar la capacidad general (descendiendo a caches l2 o l3) 
+
+conflicto: hay espacio total de sobra pero multiples bloques pelean por el minmo indice debido a correspondencia
+
+aumentar la asociatividad. En una cache 
+amd metio
+
+each nuclei has its own L1 
+
+L3 is general access while l2 is regional(?)
+
+El costo de la simplicidad: conflictos
+
+memoria principal va a la cache directamente
+ventaja: acceso rapido, hardware simple
+
+thrashing, si dos datos compiten por la misma linea. 
+
+
+Que una cache sea asociativa significa que un dato tiene la libertad de estar en cualquier parte de la cache. 
+La asociatividad total solo se usa en caches muy pequenas como la TLB porque para encontrar un dato tenes que buscar TODAS las celdas.
+
+En cambio no tener asociatividad es mucho mas sencillo. 
+
+la gran ilusion: memoria infinita y privada
+
+Cada proceso ve un espacio lineal y exclusivo. La ram esta fragmentada y compartada compartida por multiples procesos.
+
+mapa del tesoro: la tabla de paginas
+
+indice, bit validez, bit suciedad, permisos, marco fisico
+
+La tabla de paginas es una estructura en RAM que mapea cada pagina virtual a un marco fisico. 
+
+
+cuando el dato no esta: fallo de pagian
+
+execpcion: bit de validez = 0
+intervencion del SO: el SO toma el control
+
+se busca la pagian en el area de swap
+
+se copia a ram y se actualiza la tabla
+
+tintegracion: tlb ey cache (vipt)
+
+direccion virtual: indexado virtualmente, cache l1, tag from cache, cache/hit or miss.
+
+VIPT (virtually indexed, physically tagged): permite buscar en la cache mientras la TLB traduce la direccion. Paralelismo para maxima velocidad.
+

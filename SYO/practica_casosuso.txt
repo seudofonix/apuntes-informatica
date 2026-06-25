@@ -1,0 +1,45 @@
+Observar pantallas de Pedidos Fast.
+
+Analizar
+que acciones realiza el usuario
+informacion solicida el sistema
+respuestas brinda el sistema
+actores que intervienen
+situacionse especiales aparecen
+
+Se diagrama el sistema. 
+
+
+PANTALLA DE INICIO | COMENZAR / REGISTRARSE / INICIAR SESION.
+
+PANTALLA INICIO SESION
+
+Correo, contrasena, integracion oauth, registro
+
+Una vez iniciada sesion hay que elegir restaurante. Anadir al carrito
+
+hay tipos de relaciones, si hay una accion que depende de otra hay un include, estan interconectadas una depende de otra y no se pueden separar.
+
+Si son textualmente independientes, se usa un extend.
+
+
+Hay que hacer el diagrama de caso de uso desde el lado del restaurante.
+una vez que empiezar a llegar los pedidos que ve el restaurante y cuales son las causas de uso que tendriamos que usar. 
+
+
+
+
+Desde restaurante se recibe la confirmacion del pedido para hacerlo. 
+
+Nuestro caso de uso es informar al administrador, cargar menu, casos de uso en relacion a la aplicacion solamente, luegoe hay cosas internas que no van realmente.
+
+
+ACTORES: 
+repartidor
+restaurante
+cliente
+administrador
+
+Los distinots sistemas para cliente repartidor y restaurante tienen una base de datos en comun. Vemos la funcionalidad de cada una de las aplicaciones. 
+
+Otro actor el l sistema de pagos en el sistema de informacion. Lo que esta dentro del sistema es el sistema de informacion y la base de datos. Todos los actores son todo lo externo, el sistema tambien cuenta como actor. 

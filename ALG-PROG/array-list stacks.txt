@@ -1,0 +1,67 @@
+Thanks claude for the bash script to launch notepad on rofi
+
+                         ... ...      ..-                       
+ .*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@:   .                  
+   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#. .              
+  .@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  .           
+. .@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.           
+   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@. .       
+    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@        
+    @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@       
+   .@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@..    
+    @@@@@@@@@@@.     .*@@@@@@@@@@@@@@@@.        *@@@@@@@@@@@@ .   
+  . @@@@@@@@@    -@.     .@@@@@@@@@@@.    @.      @@@@@@@@@@@     
+ .  @@@@@@@@.   @@@.   .  .@@@@@@@@@    @@@.  .    @@@@@@@@@@ .  
+ . @@@@@@@@@             . @@@@@@@@@        .      @@@@@@@@@@ .  
+   @@@@@@@@@@              @@@@@@@@@              @@@@@@@@@@@    
+   @@@@@@@@@@*           .@@@@@@@@@@@          .#@@@@@@@@@@@@ .  
+.  @@@@@@@@@@@@@..      @@@@@@@@@@@@@@@@@--@@@@@@@@@@@@@@@@     
+: .@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@. =   
+   .@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.      
+   :. @@@@@@@@@@@@@@@@@@@@@@********@@@@@@@@@@@@@@@@@@@.        
+        =@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@. .        
+           @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.  .           
+           .  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@#  .           .     
+              .  @@@@@@@@@@@@@@@%..        *@@@@@@@@@@@@@@@. .  
+                 .           .=@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.  
+                     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@. 
+                     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+                     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+                     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+                    ..@@@@@@@@@@@ .@@@@@@@@@@.       .@@@@@@@@. 
+                      @@@@@@@@@@@  @@@@@@@@@ @@@@@  ..@@@@@@@@. 
+                      %@@@@@@@@@@  @@@@@@@@@ @@@@@    @@@@@@@@  
+                     . @@@@@@@@@% ..@@@@@@@@ @@@@@   ..@@@@@@ . 
+                       .@@@@@@@@.   #@@@@@@  .@@@..    @@@@@..  
+                        :@@@@@@@   : @@@@@@. .        . .@      
+                         .@@@@@ .   . .@@@                      
+                               -      .   .                     
+
+Living is easy with eyes closed misunderstanding all you see. You know it's getting hard to be someone but it's alright, it doesn't matter much to me.
+
+There's several ways to implement a stack. Either using an array or a list. These implementations have limitations, size most importantly.
+Though an array allows you to read it much more easily which lists don't, but since we're doing stacks anyway does it really matter..?
+
+
+ARRAY STACKS
+fixed max size, much more memory efficient. Random access speed matters. Simpler implementation less code to debug.
+
+LINKED STACKS
+Size is unpredictable or highly variable
+You can't afford resizing costs or you have to resize very often.
+Frequent push/pop of large elements. (You're just moving pointers, not copying data)
+Memory is fragmented, you don't need a large block of memory.
+Worse cache locality.
+
+Known max size -> array stack
+highly variable size -> linked stack
+
+
+
+We had to implement a syntax reader using stacks like... a long ass time ago. 
+
+i'm peeing myself. fuck
+
+we use the indexOf method of the string where we receive the index of the character we're looking for and if not found, we get a -1.
+
+XML PARSER WOOHOOO
